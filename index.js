@@ -1,7 +1,12 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 app.use(bodyParser.json());
 
@@ -25,7 +30,7 @@ app.post("/webhook", (req, res) => {
 });
 
 app.get("/webhook", (req, res) => {
-  let VERIFY_TOKEN = "APP";
+  let VERIFY_TOKEN = PAGE_ACCESS_TOKEN;
 
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
