@@ -21,6 +21,10 @@ app.post("/webhook", (req, res) => {
     body.entry.forEach(function (entry) {
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log("Sender PSID: " + sender_psid);
     });
 
     res.status(200).json("EVENT_RECEIVED");
@@ -45,5 +49,14 @@ app.get("/webhook", (req, res) => {
     }
   }
 });
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {}
 
 app.listen(process.env.PORT || 1337, () => console.log("listen"));
