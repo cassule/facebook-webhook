@@ -61,7 +61,7 @@ function handleMessage(sender_psid, received_message) {
 
   if (received_message.text) {
     response = {
-      text: `You sent the message: "${received_message.text}". Now send me an image!`,
+      text: `Você envioua mensagem: "${received_message.text}". Agora, manda-me qualquer imagem!`,
     };
   }
 
