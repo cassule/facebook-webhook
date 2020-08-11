@@ -69,6 +69,13 @@ function handleMessage(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {}
 
-function callSendAPI(sender_psid, response) {}
+function callSendAPI(sender_psid, response) {
+  let request_body = {
+    recipient: {
+      id: sender_psid,
+    },
+    message: response,
+  };
+}
 
 app.listen(process.env.PORT || 1337, () => console.log("listen"));
