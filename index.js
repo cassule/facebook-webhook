@@ -5,8 +5,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/ab", (req, res) => {
-  return res.status(200).json({ status: "OKAY" });
+app.get("/", (req, res) => {
+  return res.status(200).json({ status: "Home" });
 });
 
 app.post("/webhook", (req, res) => {
