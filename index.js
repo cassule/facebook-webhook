@@ -22,9 +22,14 @@ app.post("/webhook", (req, res) => {
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
 
-      // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
       console.log("Sender PSID: " + sender_psid);
+
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
+      }
     });
 
     res.status(200).json("EVENT_RECEIVED");
@@ -50,13 +55,20 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// Handles messages events
-function handleMessage(sender_psid, received_message) {}
+function handleMessage(sender_psid, received_message) {
+  let response;
 
-// Handles messaging_postbacks events
+  if (received_message.text) {
+    response = {
+      text: `You sent the message: "${received_message.text}". Now send me an image!`,
+    };
+  }
+
+  callSendAPI(sender_psid, response);
+}
+
 function handlePostback(sender_psid, received_postback) {}
 
-// Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {}
 
 app.listen(process.env.PORT || 1337, () => console.log("listen"));
